@@ -2592,6 +2592,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon-labs/react-carousel@workspace:packages/react/src/components/Carousel":
+  version: 0.0.0-use.local
+  resolution: "@carbon-labs/react-carousel@workspace:packages/react/src/components/Carousel"
+  dependencies:
+    "@carbon-labs/utilities": "npm:canary"
+  languageName: unknown
+  linkType: soft
+
 "@carbon-labs/react-example-button@workspace:packages/react/src/components/ExampleButton":
   version: 0.0.0-use.local
   resolution: "@carbon-labs/react-example-button@workspace:packages/react/src/components/ExampleButton"

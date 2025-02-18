@@ -1,0 +1,181 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import * as CarouselStories from './Carousel.stories';
+
+<Meta isTemplate />
+
+# Carousel
+
+- **Initiative owner(s):** Jeff Longshore
+- **Status:** Draft
+- **Target library:** TBD
+- **Target library maintainer(s) / PR Reviewer(s):** Carbon for IBM Products
+- **Support channel:** `#carbon-labs`
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> */}
+{/* <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon-labs/tree/main/examples/react/Carousel)
+> example implementation.
+
+[![Edit carbon-labs](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon-labs/tree/main/examples/react/Carousel)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Sizing](#sizing)
+- [Controls](#controls)
+- [State Display](#state-display)
+- [Accessibility](#accessibility)
+- [Getting started](#getting-started)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+Carousel is a simple compound component that provides a way to cycle through
+slides of content in a composable manner.
+
+## Sizing
+
+To control the size of the carousel, add a class via the `className` prop and
+set the width in your styles. The slides will fill 100% of the width of the
+Carousel.
+
+## Controls
+
+Since design may dictate how controls for a Carousel are displayed, no forward /
+backwards navigation elements are included internally in the Carousel. For
+navigation or display control, you can create a ref object and pass that in via
+the `ref` prop. This allows you a few imperative handles to control or display
+state of the carousel.
+
+1. **_scrollNext()_** - invoke this function to increment the carousel slide (if
+   possible).
+2. **_scrollPrev()_** - invoke this function to decrement the carousel slide (if
+   possible).
+3. **_resetScroll()_** - invoke this function to scroll to the 0th element in
+   the carousel instantly.
+4. **_initCarousel()_** - invoke this function to get the most updated index /
+   lastIndex / total values from the `onScroll` if needed.
+
+Calling these functions can be done via a ref. Example:
+
+```javascript
+import {
+  Carousel,
+  CarouselElement,
+} from '@carbon-labs/react-carousel/es/index';
+...
+const carouselRef = useRef(null);
+...
+
+<Carousel
+  role="region"
+  ariaLabel="Example Carousel"
+  className="exampleCarousel"
+  ref={carouselRef}
+  onScroll={(index, lastIndex, total) => {
+    console.log(
+      `onScroll handled... and index: ${index} - total: ${total}`
+    );
+  }}>
+  <CarouselElement>
+    <div>Hello</div>
+  </CarouselElement>
+  <CarouselElement>
+    <div>World</div>
+  </CarouselElement>
+  <CarouselElement>
+    <div>Example</div>
+  </CarouselElement>
+</Carousel>
+
+<Button onClick={()=> carouselRef.current?.scrollNext()}>Next</Button>
+
+```
+
+## State display
+
+For displaying the current state of the Carousel, or for managing state of
+navigation arrows, an 'onScroll' optional callback prop is included. This
+callback will return the current slide index, the last slide index, and a total
+slides value as arguments. the index properties (index and lastIndex) are zero
+indexed while the total represents the number of CarouselElements in the
+Carousel. The total will always be numerically greater (+1) than the lastIndex
+in the Carousel.
+
+Example:
+
+```javascript
+<Carousel
+    ...
+    onScroll={(index, lastIndex, total) => {
+      console.log(
+        `onScroll handled... Current slide index: ${index}, Last slide index: ${lastIndex} - total slides: ${total}`
+      );
+    }}>
+```
+
+## Accessibility
+
+Carousel supports mouse wheel scrolling (shift + wheel) as well as keyboard
+navigation. The Carousel can focus with tab navigation, once in focus you can
+navigate the carousel with the arrows.
+
+<Canvas of={CarouselStories.Default} />
+
+## Getting started
+
+Here's a quick example to get you started.
+
+```bash
+yarn add @carbon/react
+yarn add @carbon-labs/react-carousel
+```
+
+### JS (via import)
+
+```javascript
+import {
+  Carousel,
+  CarouselElement,
+} from '@carbon-labs/react-carousel/es/index';
+
+function App() {
+  const carouselRef = useRef(null);
+  return (
+    <Carousel
+      role="region"
+      ariaLabel="Example Carousel"
+      className="exampleCarousel"
+      ref={carouselRef}
+      onScroll={(index, lastIndex, total) => {
+        console.log(
+          `onScroll handled... and index: ${index} - total: ${total}`
+        );
+      }}>
+      <CarouselElement>
+        <div>Hello</div>
+      </CarouselElement>
+      <CarouselElement>
+        <div>World</div>
+      </CarouselElement>
+      <CarouselElement>
+        <div>Example</div>
+      </CarouselElement>
+    </Carousel>
+  );
+}
+
+export default App;
+```
+
+### SCSS
+
+In your styles file import
+
+```
+@use '@carbon/react';
+@use '@carbon-labs/react-carousel/scss/carousel';
+```

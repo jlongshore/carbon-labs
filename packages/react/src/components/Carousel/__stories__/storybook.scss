@@ -1,0 +1,19 @@
+@use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+.exampleStoryCarousel {
+  inline-size: convert.to-rem(512px);
+}
+
+.exampleControls {
+  border-block-start: 1px solid $black;
+  margin-block-start: $spacing-07;
+}
+
+.exampleCarouselSlide {
+  background-color: $gray-30;
+  font-weight: bold;
+  padding-block: $spacing-10;
+  text-align: center;
+}

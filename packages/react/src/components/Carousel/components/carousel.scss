@@ -1,0 +1,49 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Carbon setting imports
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+
+$prefix: 'clabs' !default;
+
+$defaultCarouselWidth: 256px;
+
+.#{$prefix}--carousel__container {
+  //border: convert.to-rem(1px) solid $border-interactive;
+  min-inline-size: $defaultCarouselWidth;
+
+  &:focus {
+    border: none;
+    @include focus-outline('outline');
+  }
+}
+
+.#{$prefix}--carousel {
+  display: flex;
+  flex-direction: row;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.#{$prefix}--carousel__element {
+  flex-shrink: 0;
+  inline-size: 100%;
+  overflow-x: hidden;
+  scroll-snap-align: center;
+}
